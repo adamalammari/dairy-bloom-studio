@@ -6,7 +6,7 @@ import StatsSection from "@/components/StatsSection";
 import ProductionSection from "@/components/ProductionSection";
 import GallerySection from "@/components/GallerySection";
 import IndustriesSection from "@/components/IndustriesSection";
-import PartnersSection from "@/components/PartnersSection";
+
 import MapSection from "@/components/MapSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
