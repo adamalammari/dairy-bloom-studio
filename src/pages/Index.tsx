@@ -10,7 +10,7 @@ import IndustriesSection from "@/components/IndustriesSection";
 import MapSection from "@/components/MapSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+
 import ChatBot from "@/components/ChatBot";
 
 const Index = () => {
