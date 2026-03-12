@@ -8,6 +8,8 @@ const HeroSection = () => {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const btnsRef = useRef<HTMLDivElement>(null);
 
+  const imgRef = useRef<HTMLImageElement>(null);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(titleRef.current, {
@@ -30,6 +32,18 @@ const HeroSection = () => {
         duration: 1,
         delay: 0.9,
         ease: "power3.out",
+      });
+
+      // Parallax effect on hero image
+      gsap.to(imgRef.current, {
+        yPercent: 30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
       });
     }, sectionRef);
     return () => ctx.revert();
