@@ -18,12 +18,25 @@ const IndustriesSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".industry-card", {
-        y: 50,
+      gsap.from(".industries-title", {
+        y: 40,
         opacity: 0,
-        stagger: 0.15,
-        duration: 0.7,
-        scrollTrigger: { trigger: ref.current, start: "top 80%" },
+        duration: 0.8,
+        scrollTrigger: { trigger: ref.current, start: "top 85%" },
+      });
+
+      gsap.from(".industry-card", {
+        y: 80,
+        opacity: 0,
+        scale: 0.8,
+        rotation: 5,
+        stagger: {
+          each: 0.12,
+          from: "edges",
+        },
+        duration: 0.8,
+        ease: "back.out(1.7)",
+        scrollTrigger: { trigger: ref.current, start: "top 75%" },
       });
     }, ref);
     return () => ctx.revert();
@@ -32,7 +45,7 @@ const IndustriesSection = () => {
   return (
     <section id="industries" ref={ref} className="section-padding bg-dairy-blue-light">
       <div className="section-container">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 industries-title">
           <h2 className="section-title">الصناعات التي نخدمها</h2>
           <p className="section-subtitle">نقدم منتجاتنا لمختلف القطاعات التجارية</p>
         </div>
