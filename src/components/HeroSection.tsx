@@ -59,9 +59,10 @@ const HeroSection = () => {
       className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden"
     >
       <img
+        ref={imgRef}
         src={heroImg}
         alt="خط إنتاج مصنع الألبان"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-[130%] object-cover will-change-transform"
       />
       <div className="relative z-10 text-center section-container">
         <h1
