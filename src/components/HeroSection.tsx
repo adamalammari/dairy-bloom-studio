@@ -1,12 +1,17 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import heroImg from "@/assets/hero-dairy.jpg";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const btnsRef = useRef<HTMLDivElement>(null);
+
+  const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -31,6 +36,18 @@ const HeroSection = () => {
         delay: 0.9,
         ease: "power3.out",
       });
+
+      // Parallax effect on hero image
+      gsap.to(imgRef.current, {
+        yPercent: 30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
     }, sectionRef);
     return () => ctx.revert();
   }, []);
@@ -42,9 +59,10 @@ const HeroSection = () => {
       className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden"
     >
       <img
+        ref={imgRef}
         src={heroImg}
         alt="خط إنتاج مصنع الألبان"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-[130%] object-cover will-change-transform"
       />
       <div className="relative z-10 text-center section-container">
         <h1

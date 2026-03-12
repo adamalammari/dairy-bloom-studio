@@ -28,7 +28,7 @@ const MapSection = () => {
         </div>
         <div className="map-container rounded-2xl overflow-hidden shadow-2xl">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d463877.5!2d46.5!3d24.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2sRiyadh!5e0!3m2!1sar!2ssa!4v1700000000000!5m2!1sar!2ssa"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.5!2d46.6753!3d24.7136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f028667e6dab1%3A0xb1e1e5e1e1e1e1e1!2sAl+Sulay%2C+Riyadh!5e0!3m2!1sar!2ssa!4v1700000000000!5m2!1sar!2ssa"
             width="100%"
             height="450"
             style={{ border: 0 }}
