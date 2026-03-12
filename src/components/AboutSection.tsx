@@ -17,23 +17,42 @@ const AboutSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Image parallax
       gsap.from(".about-img", {
         x: 100,
         opacity: 0,
         duration: 1,
+        ease: "power3.out",
         scrollTrigger: { trigger: ref.current, start: "top 80%" },
       });
+
+      gsap.to(".about-img img", {
+        yPercent: 12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ref.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
       gsap.from(".about-text", {
         x: -100,
         opacity: 0,
         duration: 1,
+        ease: "power3.out",
         scrollTrigger: { trigger: ref.current, start: "top 80%" },
       });
+
+      // Stagger feature cards with scale
       gsap.from(".about-feature", {
-        y: 40,
+        y: 60,
         opacity: 0,
+        scale: 0.85,
         stagger: 0.2,
         duration: 0.8,
+        ease: "back.out(1.7)",
         scrollTrigger: { trigger: ".about-features", start: "top 85%" },
       });
     }, ref);
@@ -53,11 +72,11 @@ const AboutSection = () => {
               يضم مصنعنا أحدث المعدات وخطوط الإنتاج المتطورة، ويعمل فيه فريق من الخبراء المتخصصين في صناعة الألبان لضمان تقديم منتجات بجودة استثنائية.
             </p>
           </div>
-          <div className="about-img">
+          <div className="about-img overflow-hidden rounded-2xl shadow-2xl">
             <img
               src={aboutImg}
               alt="داخل مصنع الألبان"
-              className="rounded-2xl shadow-2xl w-full object-cover h-[400px]"
+              className="w-full object-cover h-[400px]"
             />
           </div>
         </div>

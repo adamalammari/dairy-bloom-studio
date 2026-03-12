@@ -24,12 +24,38 @@ const GallerySection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".gallery-item", {
-        scale: 0.8,
+      gsap.from(".gallery-title", {
+        y: 40,
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.6,
-        scrollTrigger: { trigger: ref.current, start: "top 75%" },
+        duration: 0.8,
+        scrollTrigger: { trigger: ref.current, start: "top 85%" },
+      });
+
+      gsap.from(".gallery-item", {
+        scale: 0.7,
+        opacity: 0,
+        rotation: -5,
+        stagger: {
+          each: 0.1,
+          from: "center",
+        },
+        duration: 0.7,
+        ease: "back.out(1.5)",
+        scrollTrigger: { trigger: ref.current, start: "top 70%" },
+      });
+
+      // Parallax on gallery images
+      document.querySelectorAll(".gallery-item img").forEach((img) => {
+        gsap.to(img, {
+          yPercent: 10,
+          ease: "none",
+          scrollTrigger: {
+            trigger: img,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
       });
     }, ref);
     return () => ctx.revert();
@@ -38,7 +64,7 @@ const GallerySection = () => {
   return (
     <section id="gallery" ref={ref} className="section-padding">
       <div className="section-container">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 gallery-title">
           <h2 className="section-title">معرض المصنع</h2>
           <p className="section-subtitle">جولة مصورة داخل مصنعنا ومعداتنا الحديثة</p>
         </div>

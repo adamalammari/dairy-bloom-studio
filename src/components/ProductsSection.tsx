@@ -24,13 +24,42 @@ const ProductsSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".product-card", {
-        y: 60,
+      // Title animation
+      gsap.from(".products-title", {
+        y: 40,
         opacity: 0,
-        stagger: 0.15,
         duration: 0.8,
         ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 75%" },
+        scrollTrigger: { trigger: ref.current, start: "top 85%" },
+      });
+
+      // Stagger cards from bottom with rotation
+      gsap.from(".product-card", {
+        y: 100,
+        opacity: 0,
+        rotation: 3,
+        scale: 0.9,
+        stagger: {
+          each: 0.15,
+          from: "random",
+        },
+        duration: 0.9,
+        ease: "back.out(1.4)",
+        scrollTrigger: { trigger: ref.current, start: "top 70%" },
+      });
+
+      // Parallax on product images while scrolling
+      document.querySelectorAll(".product-card img").forEach((img) => {
+        gsap.to(img, {
+          yPercent: 15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: img,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
       });
     }, ref);
     return () => ctx.revert();
@@ -39,7 +68,7 @@ const ProductsSection = () => {
   return (
     <section id="products" ref={ref} className="section-padding">
       <div className="section-container">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 products-title">
           <h2 className="section-title">منتجاتنا</h2>
           <p className="section-subtitle">أجود منتجات الألبان الطازجة يومياً من مصنعنا إلى طاولتك</p>
         </div>
