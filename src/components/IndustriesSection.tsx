@@ -17,28 +17,28 @@ const IndustriesSection = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".industries-title", {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        scrollTrigger: { trigger: ref.current, start: "top 85%" },
-      });
+    const el = ref.current;
+    if (!el) return;
 
-      gsap.from(".industry-card", {
-        y: 80,
-        opacity: 0,
-        scale: 0.8,
-        rotation: 5,
-        stagger: {
-          each: 0.12,
-          from: "edges",
-        },
-        duration: 0.8,
-        ease: "back.out(1.7)",
-        scrollTrigger: { trigger: ref.current, start: "top 75%" },
-      });
-    }, ref);
+    const ctx = gsap.context(() => {
+      const titleEl = el.querySelector(".industries-title");
+      if (titleEl) {
+        gsap.fromTo(titleEl, { y: 40, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
+        });
+      }
+
+      const cards = el.querySelectorAll(".industry-card");
+      if (cards.length) {
+        gsap.fromTo(cards, { y: 80, opacity: 0, scale: 0.8 }, {
+          y: 0, opacity: 1, scale: 1,
+          stagger: { each: 0.12, from: "edges" },
+          duration: 0.8, ease: "back.out(1.7)",
+          scrollTrigger: { trigger: el, start: "top 75%", toggleActions: "play none none none" },
+        });
+      }
+    }, el);
     return () => ctx.revert();
   }, []);
 
