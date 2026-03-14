@@ -23,45 +23,35 @@ const ProductsSection = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
     const ctx = gsap.context(() => {
-      // Title animation
-      gsap.from(".products-title", {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 85%" },
-      });
+      const titleEl = el.querySelector(".products-title");
+      if (titleEl) {
+        gsap.fromTo(titleEl, { y: 40, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
+        });
+      }
 
-      // Stagger cards from bottom with rotation
-      gsap.from(".product-card", {
-        y: 100,
-        opacity: 0,
-        rotation: 3,
-        scale: 0.9,
-        stagger: {
-          each: 0.15,
-          from: "random",
-        },
-        duration: 0.9,
-        ease: "back.out(1.4)",
-        scrollTrigger: { trigger: ref.current, start: "top 70%" },
-      });
+      const cards = el.querySelectorAll(".product-card");
+      if (cards.length) {
+        gsap.fromTo(cards, { y: 80, opacity: 0, scale: 0.92 }, {
+          y: 0, opacity: 1, scale: 1,
+          stagger: { each: 0.12, from: "random" },
+          duration: 0.8, ease: "back.out(1.2)",
+          scrollTrigger: { trigger: el, start: "top 75%", toggleActions: "play none none none" },
+        });
+      }
 
-      // Parallax on product images while scrolling
-      document.querySelectorAll(".product-card img").forEach((img) => {
+      el.querySelectorAll(".product-card img").forEach((img) => {
         gsap.to(img, {
-          yPercent: 15,
-          ease: "none",
-          scrollTrigger: {
-            trigger: img,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
+          yPercent: 12, ease: "none",
+          scrollTrigger: { trigger: img, start: "top bottom", end: "bottom top", scrub: true },
         });
       });
-    }, ref);
+    }, el);
     return () => ctx.revert();
   }, []);
 
